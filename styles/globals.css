@@ -1,3 +1,12 @@
+:root {
+  --break_xl: 1500px;
+  --break_lg: 1250px;
+  --break_med: 950px;
+  --break_sm: 700px;
+  --pad: 1.8rem;
+  --test: 1px;
+}
+
 html,
 body {
   padding: 0;
@@ -18,4 +27,130 @@ a {
 .main {
   width: 20rem;
   margin: 0 auto;
+}
+
+html {
+  font-size: 10px;
+  color: var(--black-ln);
+  @media (max-width: $break_lg) {
+    font-size: 8px;
+  }
+  @media (max-width: $break_med) {
+    font-size: 7px;
+  }
+  @media (max-width: $break_sm) {
+    font-size: 5px;
+  }
+}
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 4rem;
+}
+h1, h2, h3, h4, h5, h6, p, a, li {
+  margin: 0;
+  font-size: 4rem;
+  font-family: helvetica, sans-serif;
+  letter-spacing: -0.1rem;
+  line-height: 1em;
+}
+h5 { 
+  margin: 0;
+  padding: 0;
+  height: 1em;
+}
+h6 {
+  font-size: 0.5em;
+  margin: 0;
+  padding: 0;
+  height: 1em;
+}
+p {
+  margin-bottom: 1em;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul {
+  margin: 0;
+  margin-bottom: 1em;
+  padding-left: 0.85em;
+  list-style: none;
+}
+ul li.align-bottom {
+  position: absolute;
+  bottom: var(--pad);
+}
+
+.color--white {
+  color: var(--white);
+}
+.color--black {
+  color: var(--black);
+}
+.color--gray {
+  color: var(--gray);
+}
+
+input:focus, button:focus, textarea:focus {
+  outline: none;
+}
+#main {
+  height: 100vh;
+  width: 100vw;
+}
+
+iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.content-container {
+  -webkit-overflow-scrolling: touch;
+  pointer-events: all;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  box-sizing: content-box;
+  @media(max-width: $break_sm) {
+    width: 100%;
+    padding-left: 0;
+    padding-top: $mobile_nav_height;
+  }
+}
+.module {
+  width: 100%;
+  min-height: 100%;
+  padding: var(--pad) 0;
+  display: flex;
+  flex-direction: column;
+}
+.module.space-between {
+  justify-content: space-between;
+  @media (max-width: $break_sm) {
+    padding: 0.6em 0 0 0;
+  }
+}
+
+.nav-link {
+  position: fixed;
+  font-size: 2rem;
+  top: 1em;
+  right: 1em;
+  display: inline-block;
+}
+.about-page {
+  text-align: center;
+  padding: 1em 0;
+}
+
+.home-container {
+  width: 30em;
+  margin: 10em auto;
 }
