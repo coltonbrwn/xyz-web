@@ -24,10 +24,7 @@ a {
   box-sizing: border-box;
 }
 
-.main {
-  width: 20rem;
-  margin: 0 auto;
-}
+.main {}
 
 html {
   font-size: 10px;
@@ -50,7 +47,7 @@ body {
 }
 h1, h2, h3, h4, h5, h6, p, a, li {
   margin: 0;
-  font-size: 4rem;
+  font-size: 3.4rem;
   font-family: helvetica, sans-serif;
   letter-spacing: -0.1rem;
   line-height: 1em;
@@ -153,4 +150,34 @@ iframe {
 .home-container {
   width: 30em;
   margin: 10em auto;
+}
+
+.splash-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+.splash-links {
+  position: absolute;
+  left: 0;
+  top: 2rem;
+}
+.silver-record a {
+  font-size: 6rem;
+  padding: 1rem 2rem;
+  display: block;
+}
+
+.XYZ-logo {
+  width: 100%;
+  margin: 10rem auto;
+}
+
+.XYZ-logo svg {
+  width: 100%;
+}
+.splash-links svg {
+  width: 10rem;
+  padding: 1rem 2rem;
 }
