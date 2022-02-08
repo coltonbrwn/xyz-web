@@ -22,11 +22,9 @@ import "./ERC1155CreatorProxy.sol";
 
 
 contract XYZ is ERC1155CreatorProxy {
-    string public name;
+    string public constant name="XYZ.CHURCH";
 
-    constructor() ERC1155CreatorProxy() {
-        name="XYZ.CHURCH";
-    }
+    constructor() ERC1155CreatorProxy() {}
 
     function contractURI() public view returns (string memory) {
         return "https://ipfs.io/ipfs/QmcTYE518d7oufMLMf7fHyvggmHXuvx8btzoKZ3ZcEyrA5/contractUri.json";

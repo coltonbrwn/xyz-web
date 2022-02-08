@@ -3,14 +3,14 @@ require('dotenv').config();
 // Settings please adjust
 const PUBLIC_KEY = process.env.PUBLIC_KEY;  // Wallet Address sender
 const PRIVATE_KEY = process.env.PRIVATE_KEY; //Private Walled Key
-const extensionContractAddress = "0x185f5A48768b8067A566dD0b2bbd5CfdFE65903c"; // Contract Address
+const extensionContractAddress = "0xF704aCb329142b5604b78268F39aD858b71b8B08"; // Contract Address
 const API_URL = process.env.STAGING_ALCHEMY_KEY; // Alchemy API Url
 
 
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(API_URL);
 
-const contract = require("../artifacts/contracts/ExtensionMint1155.sol/ExtensionMint1155.json");
+const contract = require("../artifacts/contracts/XYZManifoldExtension.sol/XYZManifoldExtension.json");
 
 const nftContract = new web3.eth.Contract(contract.abi, extensionContractAddress);
 
