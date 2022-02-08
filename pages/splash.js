@@ -24,6 +24,14 @@ export default class Splash extends React.Component {
                         className="coordinates-bg"
                         src="/images/coordinate-bg.png"
                     />
+                    <img
+                        className="x-axis-bg"
+                        src="/images/x-axis.png"
+                    />
+                    <img
+                        className="y-axis-bg"
+                        src="/images/y-axis.png"
+                    />
                 </div>
                 <div className="splash-right">
                     <h3>IS a DAO Making audio multimedia NFTs.</h3>

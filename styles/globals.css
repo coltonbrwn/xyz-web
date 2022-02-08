@@ -95,7 +95,7 @@ ul li.align-bottom {
 
 .full-height {
   height: 100vh;
-  padding: 1rem;
+  padding: 2.5rem;
 }
 
 .splash-outer {
@@ -117,7 +117,8 @@ ul li.align-bottom {
 .splash-right {
   flex: 1;
   height: 100%;
-  padding: 1rem;
+  padding: 2.5rem;
+  overflow: scroll;
 }
 .silver-record a {
   font-size: 6rem;
@@ -129,10 +130,44 @@ ul li.align-bottom {
   width: 100%;
   margin: 0 7rem;
 }
-.coordinates-bg {
+img.coordinates-bg {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
+  opacity: 0.6;
+}
+img.x-axis-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 14px;
+  opacity: 0.6;
+}
+img.y-axis-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 14px;
+  opacity: 0.6;
+}
+
+@media (max-width: 700px) {
+  .full-height {
+    height: auto;
+  }
+  .splash-outer {
+    flex-direction: column;
+  }
+  .splash-left {
+    border-right: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    min-height: 50vh;
+  }
+  .splash-right {
+    height: auto;
+    overflow: visible;
+  }
 }
