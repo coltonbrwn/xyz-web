@@ -7,12 +7,20 @@
   --test: 1px;
 }
 
+@font-face {
+  font-family: 'Frauen';
+  src: url('/fonts/Frauen-Roman.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/Frauen-Roman.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/Frauen-Roman.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/Frauen-Roman.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/fonts/Frauen-Roman.ttf')  format('truetype'); /* Safari, Android, iOS */
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: sans-serif;
 }
 
 a {
@@ -47,10 +55,14 @@ body {
 }
 h1, h2, h3, h4, h5, h6, p, a, li {
   margin: 0;
-  font-size: 3.4rem;
-  font-family: helvetica, sans-serif;
-  letter-spacing: -0.1rem;
-  line-height: 1em;
+  font-size: 5rem;
+  font-family: 'Frauen';
+  font-weight: 400;
+  line-height: 1.1em;
+  margin-bottom: 1em;
+}
+h3 {
+  text-transform: uppercase;
 }
 h5 { 
   margin: 0;
@@ -81,87 +93,31 @@ ul li.align-bottom {
   bottom: var(--pad);
 }
 
-.color--white {
-  color: var(--white);
-}
-.color--black {
-  color: var(--black);
-}
-.color--gray {
-  color: var(--gray);
-}
-
-input:focus, button:focus, textarea:focus {
-  outline: none;
-}
-#main {
+.full-height {
   height: 100vh;
-  width: 100vw;
+  padding: 1rem;
 }
 
-iframe {
-  border: none;
-  width: 100%;
+.splash-outer {
   height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-.content-container {
-  -webkit-overflow-scrolling: touch;
-  pointer-events: all;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  box-sizing: content-box;
-  @media(max-width: $break_sm) {
-    width: 100%;
-    padding-left: 0;
-    padding-top: $mobile_nav_height;
-  }
-}
-.module {
-  width: 100%;
-  min-height: 100%;
-  padding: var(--pad) 0;
+  border: 1px solid black;
   display: flex;
-  flex-direction: column;
-}
-.module.space-between {
-  justify-content: space-between;
-  @media (max-width: $break_sm) {
-    padding: 0.6em 0 0 0;
-  }
+  flex-direction: row;
+  align-items: center;
 }
 
-.nav-link {
-  position: fixed;
-  font-size: 2rem;
-  top: 1em;
-  right: 1em;
-  display: inline-block;
+.splash-left {
+  flex: 1;
+  height: 100%;
+  border-right: 1px solid black;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
-.about-page {
-  text-align: center;
-  padding: 1em 0;
-}
-
-.home-container {
-  width: 30em;
-  margin: 10em auto;
-}
-
-.splash-container {
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 0 4rem;
-}
-
-.splash-links {
-  position: absolute;
-  left: 0;
-  top: 2rem;
+.splash-right {
+  flex: 1;
+  height: 100%;
+  padding: 1rem;
 }
 .silver-record a {
   font-size: 6rem;
@@ -171,13 +127,12 @@ iframe {
 
 .XYZ-logo {
   width: 100%;
-  margin: 10rem auto;
+  margin: 0 7rem;
 }
-
-.XYZ-logo svg {
+.coordinates-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
-}
-.splash-links svg {
-  width: 10rem;
-  padding: 1rem 2rem;
+  height: 100%;
 }
