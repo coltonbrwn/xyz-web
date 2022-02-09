@@ -6,8 +6,12 @@ pragma solidity ^0.8.0;
 
 import "@manifoldxyz/libraries-solidity/contracts/access/AdminControl.sol";
 import "@manifoldxyz/creator-core-solidity/contracts/core/IERC1155CreatorCore.sol";
+import "@manifoldxyz/creator-core-solidity/contracts/extensions/ICreatorExtensionTokenURI.sol";
 
-contract XYZManifoldExtension is AdminControl {
+import "@openzeppelin/contracts/interfaces/IERC165.sol";
+
+
+contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
 
     address private _creator;
     uint256 public _numMinted = 0;
@@ -19,6 +23,25 @@ contract XYZManifoldExtension is AdminControl {
     constructor(address creator) {
         _creator = creator;
         _numMinted = IERC1155CreatorCore(_creator).totalSupply(TOKEN_ID);
+    }
+
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override(AdminControl, IERC165)
+        returns (bool)
+    {
+        return interfaceId == type(ICreatorExtensionTokenURI).interfaceId 
+        || AdminControl.supportsInterface(interfaceId) 
+        || super.supportsInterface(interfaceId);
+    }
+    
+    function tokenURI(address creator, uint256 tokenId)
+        external
+        view
+        returns (string memory)
+    {
+        return 'h';
     }
 
     function mintNew() public adminRequired {
@@ -34,7 +57,6 @@ contract XYZManifoldExtension is AdminControl {
 
         _callerAddress[0] = msg.sender;
         _amountsForMint[0] = 1;
-        _urisForMint[0] = 'https://studio.api.manifoldxyz.dev/asset_uploader/asset/3557341317/metadata/full';
 
         uint256[] memory minted = IERC1155CreatorCore(_creator).mintExtensionNew(_callerAddress, _amountsForMint, _urisForMint);
         _numMinted = minted.length;

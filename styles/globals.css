@@ -4,7 +4,7 @@
   --break_med: 950px;
   --break_sm: 700px;
   --pad: 1.8rem;
-  --test: 1px;
+  --line-width: 0.15rem;
 }
 
 @font-face {
@@ -64,6 +64,11 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 h3 {
   text-transform: uppercase;
 }
+h4 {
+  font-family: 'Helvetica';
+  color: rgb(99, 99, 99);
+  margin-bottom: 0;
+}
 h5 { 
   margin: 0;
   padding: 0;
@@ -100,7 +105,7 @@ ul li.align-bottom {
 
 .splash-outer {
   height: 100%;
-  border: 1px solid black;
+  border: var(--line-width) solid black;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -109,7 +114,7 @@ ul li.align-bottom {
 .splash-left {
   flex: 1;
   height: 100%;
-  border-right: 1px solid black;
+  border-right: var(--line-width) solid black;
   display: flex;
   align-items: center;
   position: relative;
@@ -117,13 +122,30 @@ ul li.align-bottom {
 .splash-right {
   flex: 1;
   height: 100%;
+  position: relative;
+  display: flex;
+}
+.splash-right .hero-content {
   padding: 2.5rem;
   overflow: scroll;
 }
-.silver-record a {
-  font-size: 6rem;
-  padding: 1rem 2rem;
-  display: block;
+.splash-right .footer-content {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-top: var(--line-width) solid black;
+}
+.footer-content .release-link {
+  background: white;
+}
+.footer-content a:hover .release-link h4 {
+  color: rgb(42, 235, 177);
+}
+.splash-right .release-link {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4em;
 }
 
 .XYZ-logo {
@@ -162,7 +184,7 @@ img.y-axis-bg {
   }
   .splash-left {
     border-right: none;
-    border-bottom: 1px solid black;
+    border-bottom: var(--line-width) solid black;
     width: 100%;
     min-height: 50vh;
   }

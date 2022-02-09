@@ -34,9 +34,23 @@ export default class Splash extends React.Component {
                     />
                 </div>
                 <div className="splash-right">
-                    <h3>IS a DAO Making audio multimedia NFTs.</h3>
-                    <h3>Each release is A unique experiment that probes artistic expression on the ownable internet.</h3>
-                    <h3>buy from our collection to support our ongoing research, and become a dao member.</h3>
+                    <div className="hero-content">
+                        <h3>XYZ is an internet-native multimedia music label</h3>
+                        <h3>Each release is a unique experiment that probes artistic expression on the ownable internet.</h3>
+                        <h3>buy from our collection to support our ongoing research, and become a dao member.</h3>
+                    </div>
+                    <div className="footer-content">
+                        <a href="/001">
+                            <div className="release-link">
+                                <h4 className="release-date">
+                                    Feb 11
+                                </h4>
+                                <h4 className='artwork-name'>
+                                    <i>Self Reflection</i>&mdash;Colt
+                                </h4>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
