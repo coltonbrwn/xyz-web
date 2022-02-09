@@ -3,7 +3,7 @@
   --break_lg: 1250px;
   --break_med: 950px;
   --break_sm: 700px;
-  --pad: 1.8rem;
+  --pad: 2.5rem;
   --line-width: 0.15rem;
 }
 
@@ -53,16 +53,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 4rem;
 }
-h1, h2, h3, h4, h5, h6, p, a, li {
+h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-size: 5rem;
   font-family: 'Frauen';
   font-weight: 400;
   line-height: 1.1em;
-  margin-bottom: 1em;
 }
 h3 {
   text-transform: uppercase;
+  margin-bottom: 1em;
 }
 h4 {
   font-family: 'Helvetica';
@@ -70,18 +70,21 @@ h4 {
   margin-bottom: 0;
 }
 h5 { 
-  margin: 0;
-  padding: 0;
-  height: 1em;
+  font-family: 'Helvetica';
+  font-weight: bold;
+  font-size: 2.8rem;
 }
 h6 {
-  font-size: 0.5em;
+  font-size: 1rem;
   margin: 0;
   padding: 0;
-  height: 1em;
 }
-p {
-  margin-bottom: 1em;
+p, strong {
+  font-size: 2.2rem;
+  margin: 0.2em 0 0 0;
+}
+small {
+  font-size: 1rem;
 }
 a {
   color: inherit;
@@ -93,14 +96,10 @@ ul {
   padding-left: 0.85em;
   list-style: none;
 }
-ul li.align-bottom {
-  position: absolute;
-  bottom: var(--pad);
-}
 
 .full-height {
   height: 100vh;
-  padding: 2.5rem;
+  padding: var(--pad);
 }
 
 .splash-outer {
@@ -126,7 +125,8 @@ ul li.align-bottom {
   display: flex;
 }
 .splash-right .hero-content {
-  padding: 2.5rem;
+  padding: var(--pad);
+  padding-bottom: 3em;
   overflow: scroll;
 }
 .splash-right .footer-content {
@@ -147,6 +147,7 @@ ul li.align-bottom {
   justify-content: space-between;
   padding: 0.4em;
 }
+
 
 .XYZ-logo {
   width: 100%;
@@ -192,4 +193,103 @@ img.y-axis-bg {
     height: auto;
     overflow: visible;
   }
+}
+
+
+
+
+
+
+.mint-page {
+padding: 2.5rem;
+}
+.mint-page .outer-container {
+  border: var(--line-width) solid black;
+}
+.mint-page .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--pad);
+}
+.mint-page .header .links {
+  font-size: 0.6em;
+}
+.mint-page .header .logo svg {
+  height: 1em;
+}
+.mint-page .mint-main img.album-img {
+  width: 100%;
+  border-radius: 2%;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.234);
+}
+.mint-page .editions-icon {
+  margin: 1em 0 2em 0;
+}  
+.mint-page .editions-icon svg {
+  height: 1em;
+}
+
+
+.mint-main {
+  padding: 2em 0;
+  border-top: var(--line-width) solid black; 
+}
+.mint-main .editions-icon {
+  display: flex;
+}
+.mint-main .editions-icon svg {
+  margin-right: 1rem;
+}
+.mint-main .editions-icon strong {
+  display: block;
+}
+.mint-main .editions-icon small {
+  display: block;
+}
+.mint-main .split-percent svg {
+  width: 1.5em;
+}
+.mint-main .mint-button svg {
+  height: 1.5em;
+  margin-top: 0.6em;
+}
+.mint-info-wrapper {
+  padding: 0.5em 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.splits {
+  padding: 2em 0;
+  border-top: var(--line-width) solid black;
+}
+.splits svg {
+  width: 80%;
+}
+.splits h5 {
+  margin-bottom: 1em;
+}
+
+
+.content-container {
+  width: 30em;
+  margin: 0 auto;
+  padding: 0 1em;
+}
+.row {
+  display: flex;
+  width: 100%;
+}
+.row .col-3 {
+  flex: 3;
+  padding-right: 1.2em;
+}
+.row .col-2 {
+  flex: 2;
+}
+.row .col-1 {
+  flex: 1;
 }

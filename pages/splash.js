@@ -37,7 +37,7 @@ export default class Splash extends React.Component {
                     <div className="hero-content">
                         <h3>XYZ is an internet-native multimedia music label</h3>
                         <h3>Each release is a unique experiment that probes artistic expression on the ownable internet.</h3>
-                        <h3>buy from our collection to support our ongoing research, and become a dao member.</h3>
+                        <h3>buy from our collection to earn $WAV, support our ongoing research, and join the treasury committee</h3>
                     </div>
                     <div className="footer-content">
                         <a href="/001">
