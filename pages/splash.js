@@ -36,7 +36,7 @@ export default class Splash extends React.Component {
                 <div className="splash-right">
                     <div className="splash-content">
                         <h3> XYZ IS AN INTERNET-NATIVE MUSIC LABEL AND ARTIST COLLECTIVE.</h3>
-                        <h3> OUR INAUGURAL RELEASE is a 50-edition NFT featuring MUSIC BY <i><a target="_blank" href="https://www.instagram.com/colt_sound/">COLT</a></i> AND ARTWORK BY <i><a target="_blank" href="https://www.instagram.com/con_cristal/">RICKY ALBA</a></i>.</h3>
+                        <h3> OUR INAUGURAL RELEASE is a 50-edition NFT featuring MUSIC BY <i><a target="_blank" rel="noreferrer" href="https://www.instagram.com/colt_sound/">COLT</a></i> AND ARTWORK BY <i><a target="_blank" rel="noreferrer" href="https://www.instagram.com/con_cristal/">RICKY ALBA</a></i>.</h3>
                         <h3> 50% OF THE SALE PROCEEDS WILL FLOW TO THE DAO.</h3>
                         <h3> AT CLOSING, SUPPORTERS WILL BE GRANTED ACCESS TO THE DAO WHERE WE WILL COLLECTIVELY DECIDE HOW TO SPEND THE POOLED FUNDS.</h3>
                         <h3> SOUND LIKE FUN? <u>minting starts 2/14</u></h3>
