@@ -15,7 +15,7 @@ export default class StorageDemo extends React.Component {
                 <div className="outer-container">
                     <div className='header'>
                         <div className="logo">
-                            <h1>XYZ / 001</h1>
+                            <h1><a href="/">XYZ / 001</a></h1>
                         </div>
                         <div className="links">
                             connect wallet
@@ -25,7 +25,10 @@ export default class StorageDemo extends React.Component {
                         <div className="content-container">
                             <div className="row">
                                 <div className="col-3">
-                                    <img className='album-img' src="/images/c1.png" />
+                                    <img className='album-img' src="/media/c1.png" />
+                                    <audio controls>
+                                        <source src="/media/self-reflection.mp3" type="audio/mp3"></source>
+                                    </audio>
                                 </div>
                                 <div className="col-3 mint-info-wrapper">
 

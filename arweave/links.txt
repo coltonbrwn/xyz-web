@@ -1,0 +1,8 @@
+audio:
+https://arweave.net/VyqseRo5gLQGtggI7DehuyFXgKRFkyHRBsItAWeQNws
+
+image:
+https://arweave.net/7lHr-STyUegq_ixGIoTI1SzqJ9t5uWXPi1bamJCvbro  
+
+metadata:
+https://arweave.net/Xsn4nYTe7tvUKlaRVvTUQC9KBHYUCvE7EsuHtNGQAwo 

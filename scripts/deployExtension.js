@@ -21,12 +21,9 @@ async function registerExtension( extensionAddress ) {
   const ExtensionContract = new web3.eth.Contract( extensionJsonInterface );
 
   const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); //get latest nonce
-
-  // ExtensionContract.methods.registerExtension
 }
 
 main()
-  // .then(registerExtension)
   .then(() => process.exit(0))
   .catch(error => {
     console.error(error);

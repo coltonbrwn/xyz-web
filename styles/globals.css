@@ -124,7 +124,7 @@ ul {
   position: relative;
   display: flex;
 }
-.splash-right .hero-content {
+.splash-right .splash-content {
   padding: var(--pad);
   padding-bottom: 3em;
   overflow: scroll;
@@ -136,16 +136,11 @@ ul {
   width: 100%;
   border-top: var(--line-width) solid black;
 }
-.footer-content .release-link {
-  background: white;
+.splash-right a {
+  text-decoration: underline;
 }
-.footer-content a:hover .release-link h4 {
+.splash-right a:hover {
   color: rgb(42, 235, 177);
-}
-.splash-right .release-link {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.4em;
 }
 
 
@@ -201,7 +196,7 @@ img.y-axis-bg {
 
 
 .mint-page {
-padding: 2.5rem;
+  padding: 2.5rem;
 }
 .mint-page .outer-container {
   border: var(--line-width) solid black;
@@ -222,6 +217,9 @@ padding: 2.5rem;
   width: 100%;
   border-radius: 2%;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.234);
+}
+.mint-page .mint-main audio {
+  width: 100%;
 }
 .mint-page .editions-icon {
   margin: 1em 0 2em 0;
@@ -285,7 +283,9 @@ padding: 2.5rem;
 }
 .row .col-3 {
   flex: 3;
-  padding-right: 1.2em;
+}
+.row .col-3:not(:last-of-type) {
+  padding-right: 2em;
 }
 .row .col-2 {
   flex: 2;

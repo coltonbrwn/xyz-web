@@ -18,7 +18,7 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
 
     uint256 public constant PRICE = 0.01 ether;
     uint256 public constant MAX_MINTABLE = 5;
-    uint8 private constant TOKEN_ID = 1;
+    uint8 private constant TOKEN_ID = 2;
 
     constructor(address creator) {
         _creator = creator;
@@ -39,9 +39,10 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
     function tokenURI(address creator, uint256 tokenId)
         external
         view
+        override
         returns (string memory)
     {
-        return 'h';
+        return 'https://arweave.net/Xsn4nYTe7tvUKlaRVvTUQC9KBHYUCvE7EsuHtNGQAwo';
     }
 
     function mintNew() public adminRequired {
@@ -60,6 +61,7 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
 
         uint256[] memory minted = IERC1155CreatorCore(_creator).mintExtensionNew(_callerAddress, _amountsForMint, _urisForMint);
         _numMinted = minted.length;
+
     }
 
     function mintExisting() public payable {

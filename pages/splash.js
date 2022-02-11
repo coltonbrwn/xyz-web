@@ -34,22 +34,12 @@ export default class Splash extends React.Component {
                     />
                 </div>
                 <div className="splash-right">
-                    <div className="hero-content">
-                        <h3>XYZ is an internet-native multimedia music label</h3>
-                        <h3>Each release is a unique experiment that probes artistic expression on the ownable internet.</h3>
-                        <h3>buy from our collection to earn $WAV, support our ongoing research, and join the treasury committee</h3>
-                    </div>
-                    <div className="footer-content">
-                        <a href="/001">
-                            <div className="release-link">
-                                <h4 className="release-date">
-                                    Feb 11
-                                </h4>
-                                <h4 className='artwork-name'>
-                                    <i>Self Reflection</i>&mdash;Colt
-                                </h4>
-                            </div>
-                        </a>
+                    <div className="splash-content">
+                        <h3> XYZ IS AN INTERNET-NATIVE MUSIC LABEL AND ARTIST COLLECTIVE.</h3>
+                        <h3> OUR INAUGURAL RELEASE is a 50-edition NFT featuring MUSIC BY <i><a target="_blank" href="https://www.instagram.com/colt_sound/">COLT</a></i> AND ARTWORK BY <i><a target="_blank" href="https://www.instagram.com/con_cristal/">RICKY ALBA</a></i>.</h3>
+                        <h3> 50% OF THE SALE PROCEEDS WILL FLOW TO THE DAO.</h3>
+                        <h3> AT CLOSING, SUPPORTERS WILL BE GRANTED ACCESS TO THE DAO WHERE WE WILL COLLECTIVELY DECIDE HOW TO SPEND THE POOLED FUNDS.</h3>
+                        <h3> SOUND LIKE FUN? <u>minting starts 2/14</u></h3>
                     </div>
                 </div>
             </div>
