@@ -274,6 +274,11 @@ img.y-axis-bg {
 .splits h5 {
   margin-bottom: 1em;
 }
+@media (max-width: 750px) {
+  .splits h5 {
+    margin-top: 1em;
+  }
+}
 
 
 .text-content {
@@ -285,6 +290,15 @@ img.y-axis-bg {
 .text-content .main {
   padding: 5em;
 }
+@media (max-width: 750px) {
+  .text-content .main {
+    padding: 2em 0;
+  }
+  .text-content h3 {
+    padding-top: 2em;
+  }
+}
+
 .text-content .sub {
   padding-bottom: 6em;
 }
@@ -307,13 +321,18 @@ img.y-axis-bg {
 
 
 .content-container {
-  width: 30em;
+  max-width: 30em;
   margin: 0 auto;
   padding: 0 1em;
 }
 .row {
   display: flex;
   width: 100%;
+}
+@media (max-width: 750px) {
+  .row {
+    flex-direction: column;
+  }
 }
 .row .col-3 {
   flex: 3;
