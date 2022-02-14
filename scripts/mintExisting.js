@@ -3,7 +3,7 @@ require('dotenv').config();
 // Settings please adjust
 const PUBLIC_KEY = process.env.PUBLIC_KEY;  // Wallet Address sender
 const PRIVATE_KEY = process.env.PRIVATE_KEY; //Private Walled Key
-const extensionContractAddress = "0x72496429Ff6F01FDa656Cdcc0A943D12B232619f"; // Contract Address
+const extensionContractAddress = process.env.NEXT_PUBLIC_MANIFOLD_EXTENSION_ADDRESS; // Contract Address
 const API_URL = process.env.STAGING_ALCHEMY_KEY; // Alchemy API Url
 
 

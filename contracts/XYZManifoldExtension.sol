@@ -14,15 +14,16 @@ import "@openzeppelin/contracts/interfaces/IERC165.sol";
 contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
 
     address private _creator;
-    uint256 public _numMinted = 0;
-
-    uint256 public constant PRICE = 0.01 ether;
-    uint256 public constant MAX_MINTABLE = 5;
+    uint256 private NUM_MINTED = 0;
+    uint256 private constant PRICE = 0.01 ether;
+    uint256 private constant MAX_MINTABLE = 5;
     uint8 private constant TOKEN_ID = 2;
+
+    event Minted(address owner);
 
     constructor(address creator) {
         _creator = creator;
-        _numMinted = IERC1155CreatorCore(_creator).totalSupply(TOKEN_ID);
+        NUM_MINTED = IERC1155CreatorCore(_creator).totalSupply(TOKEN_ID);
     }
 
     function supportsInterface(bytes4 interfaceId)
@@ -45,11 +46,19 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
         return 'https://arweave.net/Xsn4nYTe7tvUKlaRVvTUQC9KBHYUCvE7EsuHtNGQAwo';
     }
 
+    function withdrawAll() external adminRequired {
+        payable(0xb01Ba49F1B04A87D75BC268F9f3B5D1276A588f6).transfer(address(this).balance);
+    }
+
+    function getContractState() external view returns (uint256 price, uint256 maxMint, uint256 numMinted) {
+        return (PRICE, MAX_MINTABLE, NUM_MINTED);
+    }
+
     function mintNew() public adminRequired {
 
         require(
-            _numMinted == 0,
-            'TokenID 1 has already been minted'
+            NUM_MINTED == 0,
+            'TokenID has already been minted'
         );
 
         address[] memory _callerAddress = new address[](1);
@@ -60,8 +69,8 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
         _amountsForMint[0] = 1;
 
         uint256[] memory minted = IERC1155CreatorCore(_creator).mintExtensionNew(_callerAddress, _amountsForMint, _urisForMint);
-        _numMinted = minted.length;
-
+        NUM_MINTED = minted.length;
+        emit Minted(msg.sender);
     }
 
     function mintExisting() public payable {
@@ -71,11 +80,11 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
             "Not enough ether to purchase NFT."
         );
         require(
-            _numMinted > 0,
+            NUM_MINTED > 0,
             "mintNew must be called first"
         );
         require(
-            _numMinted <= MAX_MINTABLE,
+            NUM_MINTED <= MAX_MINTABLE,
             "All NFTs have been minted"
         );
 
@@ -88,6 +97,6 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
         _amountsForMint[0] = 1;
         
         IERC1155CreatorCore(_creator).mintExtensionExisting(_callerAddress, _tokenIdsForMint, _amountsForMint);
-        _numMinted ++;
+        NUM_MINTED ++;
     }
 }

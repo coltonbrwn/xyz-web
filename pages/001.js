@@ -9,6 +9,8 @@ import * as ethers from 'ethers'
 import MintButtonSVG from '../components/mint-button-svg';
 import FundingSplitsSVG from '../components/funding-splits-svg';
 import EditionsIconSVG from '../components/editions-icon-svg';
+import getContractState from '../web3/contractState';
+import SoldOutSvg from '../components/sold-out-svg';
 
 export default class StorageDemo extends React.Component {
 
@@ -17,7 +19,8 @@ export default class StorageDemo extends React.Component {
       this.state = {
           hasError: false,
           isWalletConnected: false,
-          walletAddress: ''
+          walletAddress: '',
+          contractState: {}
       }
       this.web3Provider = null;
     }
@@ -27,12 +30,14 @@ export default class StorageDemo extends React.Component {
             const provider = await detectEthereumProvider();
             this.web3Provider = provider;
             const accounts = await this.web3Provider.request({ method: 'eth_requestAccounts' });
+            const contractState = await getContractState(provider);
             this.setState({
                 isWalletConnected: true,
-                walletAddress: accounts[0]
+                walletAddress: accounts[0],
+                contractState
             })
         } catch(e) {
-
+            console.log(e)
         }
     }
 
@@ -40,6 +45,7 @@ export default class StorageDemo extends React.Component {
         try {
             mintExisting(this.web3Provider)
         } catch (e) {
+            alert(String(e))
             this.setState({
                 hasError: e
             })
@@ -72,6 +78,11 @@ export default class StorageDemo extends React.Component {
     }
 
     render() {
+        const numRemaining = this.state.contractState.numMinted
+            ? this.state.contractState.maxMint - this.state.contractState.numMinted
+            : '-';
+        const maxMint = this.state.contractState.maxMint || '-';
+        const isSoldOut = numRemaining <= 0;
         return (
             <div className="mint-page">
                 <div className="outer-container">
@@ -112,7 +123,7 @@ export default class StorageDemo extends React.Component {
                                         <div className="editions-icon">
                                             <EditionsIconSVG />
                                             <div className="editions-remaining">
-                                                <strong>50/50</strong>                 
+                                                <strong>{ numRemaining }/{ maxMint }</strong>                 
                                                 <small>editions remaining</small>                           
                                             </div>
                                         </div>
@@ -122,8 +133,8 @@ export default class StorageDemo extends React.Component {
                                         <p>
                                             In addition to a limited ERC-1155 token, you'll recieve 1 $WAV governance token, giving you voting rights for the use of the pooled funds.<br/> <a href="/faq">Learn more</a>
                                         </p>
-                                        <div className="mint-button" onClick={ this.onMintButtonClick }>
-                                            <MintButtonSVG />
+                                        <div className="mint-button" onClick={ !isSoldOut ? this.onMintButtonClick : ()=>{} }>
+                                            { isSoldOut ? <SoldOutSvg /> : <MintButtonSVG /> }
                                         </div>
                                     </div>
                                 </div>

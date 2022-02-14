@@ -12,7 +12,8 @@ async function main() {
   
   console.log("You need this address for minting!");
   console.log("Contract deployed to:", contractAddress);
-  
+  console.log(`Etherscan verification command:   npx hardhat verify --contract contracts/XYZManifoldExtension.sol:XYZManifoldExtension --network rinkeby "${ contractAddress }" ${ mainContract }`);
+
   return contractAddress;
 }
 

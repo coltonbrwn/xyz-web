@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 
-const extensionContractAddress = "0x72496429Ff6F01FDa656Cdcc0A943D12B232619f";
+const extensionContractAddress = '0xA9Ad7e6234D52Ea19ccD1FDE69Eb0Bff2f354709';
 const contract = require("../artifacts/contracts/XYZManifoldExtension.sol/XYZManifoldExtension.json");
 
 async function mintExisting(provider) {
@@ -9,14 +9,11 @@ async function mintExisting(provider) {
     const accounts = await provider.request({ method: 'eth_requestAccounts' })
     const fromAddress = accounts[0]
     const nonce = await web3.eth.getTransactionCount(fromAddress, 'latest')
-    console.log(nonce)
     const gasPrice = await web3.eth.getGasPrice()
-    console.log(gasPrice)
     const estimatedGas = await nftContract.methods.mintExisting().estimateGas({
         from: fromAddress,
         value: web3.utils.toWei('0.1', 'ether')
     })
-    console.log(estimatedGas)
     const tx = {
         'from': fromAddress,
         'to': extensionContractAddress,
@@ -27,7 +24,6 @@ async function mintExisting(provider) {
         'chain': 'rinkeby',
         'data': nftContract.methods.mintExisting().encodeABI()
     }
-
     const txHash = await ethereum.request({
         method: 'eth_sendTransaction',
         params: [tx],
