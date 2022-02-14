@@ -1,6 +1,9 @@
 import React  from 'react'
 import Link from 'next/link'
-import { useWeb3React } from '@web3-react/core'
+import mintExisting from '../web3/mintExisting';
+import detectEthereumProvider from '@metamask/detect-provider';
+
+
 import * as ethers from 'ethers'
 
 import MintButtonSVG from '../components/mint-button-svg';
@@ -11,7 +14,61 @@ export default class StorageDemo extends React.Component {
 
     constructor() {
       super()
-      this.state = {}
+      this.state = {
+          hasError: false,
+          isWalletConnected: false,
+          walletAddress: ''
+      }
+      this.web3Provider = null;
+    }
+
+    async componentDidMount() {
+        try {
+            const provider = await detectEthereumProvider();
+            this.web3Provider = provider;
+            const accounts = await this.web3Provider.request({ method: 'eth_requestAccounts' });
+            this.setState({
+                isWalletConnected: true,
+                walletAddress: accounts[0]
+            })
+        } catch(e) {
+
+        }
+    }
+
+    onMintButtonClick = async () => {
+        try {
+            mintExisting(this.web3Provider)
+        } catch (e) {
+            this.setState({
+                hasError: e
+            })
+        }
+    }
+
+    onConnectWalletClick = async () => {
+        if (this.state.isWalletConnected) {
+            return
+        }
+        this._metamaskInit()
+    }
+    
+    _metamaskInit = async () => {
+        if (!this.web3Provider) {
+            this.setState({
+                isWalletConnected: false,
+                isSelectingWalletType: false
+            })
+        }
+        try {
+            const accounts = await this.web3Provider.request({ method: 'eth_requestAccounts' });
+            this.setState({
+                isWalletConnected: true,
+                walletAddress: accounts[0]
+            })
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     render() {
@@ -27,7 +84,15 @@ export default class StorageDemo extends React.Component {
                             </h1>
                         </div>
                         <div className="links">
-                            connect wallet
+                            {
+                                this.state.isWalletConnected ? (
+                                    <span>{ `${this.state.walletAddress.slice(0, 6)}...${ this.state.walletAddress.slice(-4)} `}</span>
+                                ) : (
+                                    <a onClick={ this.onConnectWalletClick }>
+                                        connect wallet
+                                    </a>
+                                )
+                            }
                         </div>
                     </div>
                     <div className="mint-main">
@@ -55,9 +120,9 @@ export default class StorageDemo extends React.Component {
                                   
                                     <div>
                                         <p>
-                                            In addition to a limited ERC-1155 token, you’ll recieve 1 $WAV governance token, giving you voting rights for the use of the pooled funds.<br/> <a href="/faq">Learn more</a>
+                                            In addition to a limited ERC-1155 token, you'll recieve 1 $WAV governance token, giving you voting rights for the use of the pooled funds.<br/> <a href="/faq">Learn more</a>
                                         </p>
-                                        <div className="mint-button">
+                                        <div className="mint-button" onClick={ this.onMintButtonClick }>
                                             <MintButtonSVG />
                                         </div>
                                     </div>

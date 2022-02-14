@@ -29,6 +29,7 @@ a {
 }
 a:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 * {
@@ -255,6 +256,11 @@ img.y-axis-bg {
 .mint-main .mint-button svg {
   height: 1.5em;
   margin-top: 0.6em;
+  cursor: pointer;
+  transition: 100ms transform;
+}
+.mint-main .mint-button svg:hover {
+  transform: scale(1.02, 1.02);
 }
 .mint-info-wrapper {
   padding: 0.5em 0;
