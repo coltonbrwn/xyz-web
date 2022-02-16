@@ -2,14 +2,14 @@
 
 pragma solidity ^0.8.0;
 
-/// @author: swms.de
+/// @author Colton Brown (@colt_xyz, coltonbrown.com)
+/// @title Manifold Extension for XYZ.CHURCH
 
 import "@manifoldxyz/libraries-solidity/contracts/access/AdminControl.sol";
 import "@manifoldxyz/creator-core-solidity/contracts/core/IERC1155CreatorCore.sol";
 import "@manifoldxyz/creator-core-solidity/contracts/extensions/ICreatorExtensionTokenURI.sol";
 
 import "@openzeppelin/contracts/interfaces/IERC165.sol";
-
 
 contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
 
@@ -18,6 +18,7 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
     uint256 private constant PRICE = 0.01 ether;
     uint256 private constant MAX_MINTABLE = 5;
     uint8 private constant TOKEN_ID = 3;
+    bool private isEnabled = true;
 
     event Minted(address owner);
 
@@ -37,6 +38,11 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
         || super.supportsInterface(interfaceId);
     }
     
+
+    /// Supplies the metadata URL; a manifold feature.
+    /// @param creator the address which minted the token
+    /// @param tokenId the token ID
+    /// @return the metadata URL
     function tokenURI(address creator, uint256 tokenId)
         external
         view
@@ -46,14 +52,30 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
         return 'https://arweave.net/Xsn4nYTe7tvUKlaRVvTUQC9KBHYUCvE7EsuHtNGQAwo';
     }
 
+    /// Withdraw proceeds of the mint to XYZ DAO
     function withdrawAll() external adminRequired {
         payable(0xb01Ba49F1B04A87D75BC268F9f3B5D1276A588f6).transfer(address(this).balance);
     }
 
+    /// Expose state variables for use in xyz.church frontend
+    /// @return price NFT mint price
+    /// @return maxMint the maximum allowed number of Tokens
+    /// @return numMinted the number of tokens already minted
     function getContractState() external view returns (uint256 price, uint256 maxMint, uint256 numMinted) {
         return (PRICE, MAX_MINTABLE, NUM_MINTED);
     }
 
+    // Safety valves for pausing and unpausing the contract
+    function pauseMint() public adminRequired {
+        isEnabled = false;
+    }
+
+    function resumeMint() public adminRequired {
+        isEnabled = true;
+    }
+
+    // Initialize the minting session by creating the first token as an admin; this is a manifold pattern
+    // @dev see manifold's documentation https://www.dropbox.com/s/x9t53qf3werqxru/Manifold%20Creator%20Architecture.pdf
     function mintNew() public adminRequired {
 
         require(
@@ -73,19 +95,25 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
         emit Minted(msg.sender);
     }
 
+    // Mint a token that has already been initialized with a call to the above method
+    // @dev see manifold's documentation https://www.dropbox.com/s/x9t53qf3werqxru/Manifold%20Creator%20Architecture.pdf
     function mintExisting() public payable {
 
+        require (
+            isEnabled,
+            "Minting has been paused."
+        );
         require(
             msg.value >= PRICE,
-            "Not enough ether to purchase NFT."
+            "Not enough ether to purchase token."
         );
         require(
             NUM_MINTED > 0,
-            "mintNew must be called first"
+            "This token has not yet been initialized by an administrator."
         );
         require(
             NUM_MINTED <= MAX_MINTABLE,
-            "All NFTs have been minted"
+            "Token is sold out."
         );
 
         address[] memory _callerAddress = new address[](1);
