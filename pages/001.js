@@ -18,7 +18,8 @@ export default class StorageDemo extends React.Component {
           hasError: false,
           isWalletConnected: false,
           walletAddress: '',
-          contractState: {}
+          contractState: {},
+          transactionPending: false
       }
       this.web3Provider = null;
     }
@@ -41,13 +42,27 @@ export default class StorageDemo extends React.Component {
     }
 
     onMintButtonClick = async () => {
+        if (
+            ! this.state.contractState.price ||
+            this._isSoldOut() ||
+            this.state.transactionPending
+        ) {
+            return;
+        }
+
         try {
-            const adjustedPrice = Number(this.state.contractState.price)
-            mintExisting(this.web3Provider, adjustedPrice)
-        } catch (e) {
-            alert(String(e))
             this.setState({
-                hasError: e
+                transactionPending: true
+            })
+            const txHash = await mintExisting(this.web3Provider, Number(this.state.contractState.price))
+            this.setState({
+                transactionPending: false
+            })
+        } catch (e) {
+            alert(String(e.message))
+            this.setState({
+                hasError: e,
+                transactionPending: false
             })
         }
     }
@@ -59,6 +74,23 @@ export default class StorageDemo extends React.Component {
         this._metamaskInit()
     }
     
+    _numRemaining() {
+        let numRemaining;
+        if (this.state.contractState.numMinted) {
+            numRemaining = this.state.contractState.maxMint - this.state.contractState.numMinted;
+            numRemaining = numRemaining < 0 ? 0 : numRemaining;
+            return String(numRemaining)
+        }
+    }
+
+    _isSoldOut() {
+        let isSoldOut;
+        if (this.state.contractState.numMinted) {
+            isSoldOut = (this.state.contractState.maxMint - this.state.contractState.numMinted) <= 0;
+            return Boolean(isSoldOut)
+        }
+    }
+
     _metamaskInit = async () => {
         if (!this.web3Provider) {
             this.setState({
@@ -70,7 +102,8 @@ export default class StorageDemo extends React.Component {
             const accounts = await this.web3Provider.request({ method: 'eth_requestAccounts' });
             this.setState({
                 isWalletConnected: true,
-                walletAddress: accounts[0]
+                walletAddress: accounts[0],
+                transactionPending: false
             })
         } catch (e) {
             console.log(e)
@@ -78,12 +111,20 @@ export default class StorageDemo extends React.Component {
     }
 
     render() {
-        const numRemaining = this.state.contractState.numMinted
-            ? this.state.contractState.maxMint - this.state.contractState.numMinted
-            : '-';
+        const numRemaining = this._numRemaining() || '-';
         const maxMint = this.state.contractState.maxMint || '-';
-        const isSoldOut = numRemaining <= 0;
         const price = this.state.contractState.price ? web3.utils.fromWei(String(this.state.contractState.price), 'ether') : '-';
+
+        let buttonText, isButtonActive;
+        if (this._isSoldOut()) {
+            buttonText = 'Sold Out'
+        } else if (this.state.transactionPending) {
+            buttonText = 'Transaction Pending...'
+        } else {
+            buttonText = 'Mint'
+            isButtonActive = true;
+        }
+
 
         return (
             <div className="mint-page">
@@ -136,8 +177,11 @@ export default class StorageDemo extends React.Component {
                                     </p>
 
                                     <div className="mint-button-container">
-                                        <div className="mint-button-bg" onClick={ !isSoldOut ? this.onMintButtonClick : ()=>{} }>
-                                            { isSoldOut ? "Sold Out" : "Mint" }
+                                        <div
+                                            className={`mint-button-bg ${ isButtonActive ? '' : '--inactive' }`}
+                                            onClick={ this.onMintButtonClick }
+                                        >
+                                            { buttonText }
                                         </div>
                                         <div>
                                             <strong>Price:</strong>
