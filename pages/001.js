@@ -25,16 +25,21 @@ export default class StorageDemo extends React.Component {
     }
 
     async componentDidMount() {
+
         try {
-            const provider = await detectEthereumProvider();
+            const alchemyProvider = createAlchemyWeb3( process.env.NEXT_PUBLIC_STAGING_ALCHEMY_KEY );
+            const [{ contractState }, provider] = await Promise.all([
+                getContractState(alchemyProvider),
+                detectEthereumProvider()
+            ])
+            this.setState({
+                contractState
+            })
             this.web3Provider = provider;
             const accounts = await this.web3Provider.request({ method: 'eth_requestAccounts' });
-            const alchemyProvider = createAlchemyWeb3( process.env.NEXT_PUBLIC_STAGING_ALCHEMY_KEY );
-            const { contractState } = await getContractState(alchemyProvider);
             this.setState({
                 isWalletConnected: true,
-                walletAddress: accounts[0],
-                contractState
+                walletAddress: accounts[0]
             })
         } catch(e) {
             console.log(e)
@@ -103,6 +108,7 @@ export default class StorageDemo extends React.Component {
                 isWalletConnected: false,
                 isSelectingWalletType: false
             })
+            alert('No ethereum provider found. Is metamask installed?')
         }
         try {
             const accounts = await this.web3Provider.request({ method: 'eth_requestAccounts' });
@@ -210,6 +216,10 @@ export default class StorageDemo extends React.Component {
                                     <p>
                                         View activity on <strong><a href={ this._generateEtherscanUrl() } target="_blank" rel="noreferrer">Etherscan→</a></strong>
                                     </p>
+                                    <br/>
+                                    <p>
+                                        Minting will grant you membership access to our <strong><a href="https://discord.gg/XmCFR2vJ" target="_blank" rel="noreferrer">Discord→</a></strong>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -289,6 +299,11 @@ export default class StorageDemo extends React.Component {
                                     <h6>
                                         <a href="https://www.instagram.com/colt_sound" target="_blank" rel="noreferrer">
                                             Instagram
+                                        </a>
+                                    </h6>
+                                    <h6>
+                                        <a href="https://discord.gg/XmCFR2vJ" target="_blank" rel="noreferrer">
+                                            Discord
                                         </a>
                                     </h6>
                                 </div>

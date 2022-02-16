@@ -17,7 +17,7 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
     uint256 private NUM_MINTED = 0;
     uint256 private constant PRICE = 0.01 ether;
     uint256 private constant MAX_MINTABLE = 5;
-    uint8 private constant TOKEN_ID = 3;
+    uint8 private constant TOKEN_ID = 4;
     bool private isEnabled = true;
 
     event Minted(address owner);
@@ -45,7 +45,7 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
     /// @return the metadata URL
     function tokenURI(address creator, uint256 tokenId)
         external
-        view
+        pure
         override
         returns (string memory)
     {
@@ -66,17 +66,17 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
     }
 
     // Safety valves for pausing and unpausing the contract
-    function pauseMint() public adminRequired {
+    function pauseMint() external adminRequired {
         isEnabled = false;
     }
 
-    function resumeMint() public adminRequired {
+    function resumeMint() external adminRequired {
         isEnabled = true;
     }
 
     // Initialize the minting session by creating the first token as an admin; this is a manifold pattern
     // @dev see manifold's documentation https://www.dropbox.com/s/x9t53qf3werqxru/Manifold%20Creator%20Architecture.pdf
-    function mintNew() public adminRequired {
+    function mintNew() external adminRequired {
 
         require(
             NUM_MINTED == 0,
@@ -97,7 +97,7 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
 
     // Mint a token that has already been initialized with a call to the above method
     // @dev see manifold's documentation https://www.dropbox.com/s/x9t53qf3werqxru/Manifold%20Creator%20Architecture.pdf
-    function mintExisting() public payable {
+    function mintExisting() external payable {
 
         require (
             isEnabled,
