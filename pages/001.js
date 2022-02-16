@@ -29,8 +29,8 @@ export default class StorageDemo extends React.Component {
             const provider = await detectEthereumProvider();
             this.web3Provider = provider;
             const accounts = await this.web3Provider.request({ method: 'eth_requestAccounts' });
-            const alcehmyProvider = createAlchemyWeb3( process.env.NEXT_PUBLIC_STAGING_ALCHEMY_KEY );
-            const { contractState, events } = await getContractState(alcehmyProvider);
+            const alchemyProvider = createAlchemyWeb3( process.env.NEXT_PUBLIC_STAGING_ALCHEMY_KEY );
+            const { contractState } = await getContractState(alchemyProvider);
             this.setState({
                 isWalletConnected: true,
                 walletAddress: accounts[0],
@@ -91,6 +91,12 @@ export default class StorageDemo extends React.Component {
         }
     }
 
+    _generateEtherscanUrl() {
+        const network = process.env.NEXT_PUBLIC_NETWORK_NAME
+        const contractAddress = process.env.NEXT_PUBLIC_MANIFOLD_CONTRACT_ADDRESS
+        return `https://${ network === 'rinkeby' ? 'rinkeby.' : ''}etherscan.io/address/${ contractAddress }`
+    }
+
     _metamaskInit = async () => {
         if (!this.web3Provider) {
             this.setState({
@@ -124,7 +130,6 @@ export default class StorageDemo extends React.Component {
             buttonText = 'Mint'
             isButtonActive = true;
         }
-
 
         return (
             <div className="mint-page">
@@ -202,6 +207,9 @@ export default class StorageDemo extends React.Component {
                                 </div>
                                 <div className="col-1">
                                     <h5>Supporters</h5>
+                                    <p>
+                                        View activity on <strong><a href={ this._generateEtherscanUrl() } target="_blank" rel="noreferrer">Etherscan→</a></strong>
+                                    </p>
                                 </div>
                             </div>
                         </div>

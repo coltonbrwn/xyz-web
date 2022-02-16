@@ -6,7 +6,7 @@ const web3 = createAlchemyWeb3(API_URL);
 
 async function main() {
   const contractFactory = await hre.ethers.getContractFactory('XYZManifoldExtension');
-  const mainContract = process.env.MANIFOLD_CONTRACT_ADDRESS;
+  const mainContract = process.env.NEXT_PUBLIC_MANIFOLD_CONTRACT_ADDRESS;
   const contract = await contractFactory.deploy(mainContract);
   const { address:contractAddress } = await contract.deployed();
   
