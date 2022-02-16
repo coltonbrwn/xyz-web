@@ -48,7 +48,7 @@ export default class Splash extends React.Component {
                         <Link href="/001">
                             <div className="mint-ad">
                                 <img src="/images/cover-xs.png" />
-                                <strong>Minting is live</strong>
+                                <strong>Minting is live!</strong>
                             </div>
                         </Link>
                     </div>
