@@ -40,10 +40,9 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
     
 
     /// Supplies the metadata URL; a manifold feature.
-    /// @param creator the address which minted the token
-    /// @param tokenId the token ID
-    /// @return the metadata URL
-    function tokenURI(address creator, uint256 tokenId)
+    /// @dev can be configured to change based on caller
+    /// @return metadata URL containing a json schema
+    function tokenURI(address /*creator*/, uint256 /*tokenId*/)
         external
         pure
         override
@@ -112,7 +111,7 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
             "This token has not yet been initialized by an administrator."
         );
         require(
-            NUM_MINTED <= MAX_MINTABLE,
+            NUM_MINTED < MAX_MINTABLE,
             "Token is sold out."
         );
 

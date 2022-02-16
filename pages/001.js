@@ -27,15 +27,8 @@ export default class StorageDemo extends React.Component {
     async componentDidMount() {
 
         try {
-            const alchemyProvider = createAlchemyWeb3( process.env.NEXT_PUBLIC_STAGING_ALCHEMY_KEY );
-            const [{ contractState }, provider] = await Promise.all([
-                getContractState(alchemyProvider),
-                detectEthereumProvider()
-            ])
-            this.setState({
-                contractState
-            })
-            this.web3Provider = provider;
+            this._fetchContractViewData();
+            this.web3Provider = await detectEthereumProvider();
             const accounts = await this.web3Provider.request({ method: 'eth_requestAccounts' });
             this.setState({
                 isWalletConnected: true,
@@ -60,6 +53,7 @@ export default class StorageDemo extends React.Component {
                 transactionPending: true
             })
             const txHash = await mintExisting(this.web3Provider, Number(this.state.contractState.price))
+            this._fetchContractViewData()
             this.setState({
                 transactionPending: false
             })
@@ -77,6 +71,14 @@ export default class StorageDemo extends React.Component {
             return
         }
         this._metamaskInit()
+    }
+
+    _fetchContractViewData = async () => {
+        const alchemyProvider = createAlchemyWeb3( process.env.NEXT_PUBLIC_STAGING_ALCHEMY_KEY );
+        const { contractState } = await getContractState(alchemyProvider);
+        this.setState({
+            contractState
+        })
     }
     
     _numRemaining() {
@@ -99,7 +101,7 @@ export default class StorageDemo extends React.Component {
     _generateEtherscanUrl() {
         const network = process.env.NEXT_PUBLIC_NETWORK_NAME
         const contractAddress = process.env.NEXT_PUBLIC_MANIFOLD_CONTRACT_ADDRESS
-        return `https://${ network === 'rinkeby' ? 'rinkeby.' : ''}etherscan.io/address/${ contractAddress }`
+        return `https://${ network === 'rinkeby' ? 'rinkeby.' : ''}etherscan.io/token/${ contractAddress }`
     }
 
     _metamaskInit = async () => {

@@ -32,6 +32,26 @@ export default class Splash extends React.Component {
                         className="y-axis-bg"
                         src="/images/y-axis.png"
                     />
+                    <div className="text-meta">
+                        <p>
+                            etherscan: <a target="_blank" rel="noreferrer" href="https://etherscan.io/address/0xb01Ba49F1B04A87D75BC268F9f3B5D1276A588f6">0xb01Ba4...88f6</a>
+                        </p>
+                        <p>
+                            treasury: 4.353 ETH
+                        </p>
+                        <p>
+                            DAO members: 19
+                        </p>
+                    </div>
+
+                    <div className="mint-ad-container">
+                        <Link href="/001">
+                            <div className="mint-ad">
+                                <img src="/images/cover-xs.png" />
+                                <strong>Minting is live</strong>
+                            </div>
+                        </Link>
+                    </div>
                 </div>
                 <div className="splash-right">
                     <div className="splash-content">
@@ -39,7 +59,7 @@ export default class Splash extends React.Component {
                         <h3> OUR INAUGURAL RELEASE is a 50-edition NFT featuring MUSIC BY <i><a target="_blank" rel="noreferrer" href="https://www.instagram.com/colt_sound/">COLT</a></i> AND ARTWORK BY <i><a target="_blank" rel="noreferrer" href="https://www.instagram.com/con_cristal/">RICKY ALBA</a></i>.</h3>
                         <h3> 50% OF THE SALE PROCEEDS WILL FLOW TO THE DAO.</h3>
                         <h3> AT CLOSING, SUPPORTERS WILL BE GRANTED ACCESS TO THE DAO WHERE WE WILL COLLECTIVELY DECIDE HOW TO SPEND THE POOLED FUNDS.</h3>
-                        <h3> SOUND LIKE FUN? <Link href="/001"><a>minting starts 2/14</a></Link></h3>
+                        <h3> SOUND LIKE FUN? <Link href="/001"><a>minting is now live</a></Link></h3>
                     </div>
                 </div>
             </div>

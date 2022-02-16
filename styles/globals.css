@@ -39,7 +39,7 @@ a:hover {
 .main {}
 
 html {
-  font-size: 10px;
+  font-size: 7px;
   color: var(--black-ln);
   @media (max-width: $break_lg) {
     font-size: 8px;
@@ -122,6 +122,38 @@ ul {
   display: flex;
   align-items: center;
   position: relative;
+}
+.splash-left .mint-ad-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 2rem;
+}
+.splash-left .mint-ad {
+  height: 3.5em;
+  width: 8.5em;
+  display: flex;
+  align-items: center;
+  background: rgb(232, 232, 232);
+  padding: 2rem 4rem 2rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.splash-left .mint-ad:hover {
+  transform: scale(1.02, 1.02)
+}
+.splash-left .mint-ad img {
+  height: 100%;
+  margin-right: 3rem;
+}
+.splash-left .text-meta {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 2rem;
+}
+.splash-left .text-meta p {
+  font-size: 2rem;
 }
 .splash-right {
   flex: 1;
