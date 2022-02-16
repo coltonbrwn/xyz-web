@@ -41,7 +41,7 @@ module.exports = {
   },
   networks: {
     rinkeby: {
-      url: process.env.STAGING_ALCHEMY_KEY,
+      url: process.env.NEXT_PUBLIC_STAGING_ALCHEMY_KEY,
       accounts: [process.env.PRIVATE_KEY],
     },
   },

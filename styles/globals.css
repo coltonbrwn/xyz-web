@@ -227,10 +227,13 @@ img.y-axis-bg {
   width: 100%;
 }
 .mint-page .editions-icon {
-  margin: 1em 0 2em 0;
+  margin: 2em 0 2em 0;
+  display: flex;
+  align-items: center;
 }  
 .mint-page .editions-icon svg {
-  height: 1em;
+  height: 1.8em;
+  margin-right: 1rem;
 }
 
 
@@ -238,12 +241,7 @@ img.y-axis-bg {
   padding: 2em 0;
   border-top: var(--line-width) solid black; 
 }
-.mint-main .editions-icon {
-  display: flex;
-}
-.mint-main .editions-icon svg {
-  margin-right: 1rem;
-}
+
 .mint-main .editions-icon strong {
   display: block;
 }
@@ -253,16 +251,28 @@ img.y-axis-bg {
 .mint-main .split-percent svg {
   width: 1.5em;
 }
-.mint-main .mint-button svg {
-  height: 1.5em;
-  margin-top: 0.6em;
-  cursor: pointer;
-  transition: 100ms transform;
+.mint-main .mint-button-bg {
+  background: linear-gradient(180deg, #A6D5F8 0%, #F8F8F8 100%);
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 17px;
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 0.6em 1.7em;
+  margin-right: 2em;
 }
-.mint-main .mint-button svg:hover {
+.mint-main .mint-button-bg:hover {
   transform: scale(1.02, 1.02);
+  cursor: pointer;
 }
+
+.mint-main .mint-button-container {
+  display: flex;
+  align-items: center;
+}
+
 .mint-info-wrapper {
+  font-size: 2.2rem;
   padding: 0.5em 0;
   display: flex;
   flex-direction: column;

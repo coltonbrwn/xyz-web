@@ -4,7 +4,7 @@ require('dotenv').config();
 const PUBLIC_KEY = process.env.PUBLIC_KEY;  // Wallet Address sender
 const PRIVATE_KEY = process.env.PRIVATE_KEY; //Private Walled Key
 const extensionContractAddress = process.env.NEXT_PUBLIC_MANIFOLD_EXTENSION_ADDRESS; // Contract Address
-const API_URL = process.env.STAGING_ALCHEMY_KEY; // Alchemy API Url
+const API_URL = process.env.NEXT_PUBLIC_STAGING_ALCHEMY_KEY; // Alchemy API Url
 
 
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");

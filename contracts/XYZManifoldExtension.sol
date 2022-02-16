@@ -17,7 +17,7 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
     uint256 private NUM_MINTED = 0;
     uint256 private constant PRICE = 0.01 ether;
     uint256 private constant MAX_MINTABLE = 5;
-    uint8 private constant TOKEN_ID = 2;
+    uint8 private constant TOKEN_ID = 3;
 
     event Minted(address owner);
 
@@ -76,7 +76,7 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
     function mintExisting() public payable {
 
         require(
-            msg.value >= PRICE * 1,
+            msg.value >= PRICE,
             "Not enough ether to purchase NFT."
         );
         require(
@@ -98,5 +98,6 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
         
         IERC1155CreatorCore(_creator).mintExtensionExisting(_callerAddress, _tokenIdsForMint, _amountsForMint);
         NUM_MINTED ++;
+        emit Minted(msg.sender);
     }
 }

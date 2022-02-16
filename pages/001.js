@@ -1,16 +1,14 @@
 import React  from 'react'
 import Link from 'next/link'
-import mintExisting from '../web3/mintExisting';
 import detectEthereumProvider from '@metamask/detect-provider';
+import { createAlchemyWeb3  } from '@alch/alchemy-web3';
+import web3 from 'web3';
 
+import mintExisting from '../web3/mintExisting';
+import getContractState from '../web3/contractState';
 
-import * as ethers from 'ethers'
-
-import MintButtonSVG from '../components/mint-button-svg';
 import FundingSplitsSVG from '../components/funding-splits-svg';
 import EditionsIconSVG from '../components/editions-icon-svg';
-import getContractState from '../web3/contractState';
-import SoldOutSvg from '../components/sold-out-svg';
 
 export default class StorageDemo extends React.Component {
 
@@ -30,7 +28,8 @@ export default class StorageDemo extends React.Component {
             const provider = await detectEthereumProvider();
             this.web3Provider = provider;
             const accounts = await this.web3Provider.request({ method: 'eth_requestAccounts' });
-            const contractState = await getContractState(provider);
+            const alcehmyProvider = createAlchemyWeb3( process.env.NEXT_PUBLIC_STAGING_ALCHEMY_KEY );
+            const { contractState, events } = await getContractState(alcehmyProvider);
             this.setState({
                 isWalletConnected: true,
                 walletAddress: accounts[0],
@@ -43,7 +42,8 @@ export default class StorageDemo extends React.Component {
 
     onMintButtonClick = async () => {
         try {
-            mintExisting(this.web3Provider)
+            const adjustedPrice = Number(this.state.contractState.price)
+            mintExisting(this.web3Provider, adjustedPrice)
         } catch (e) {
             alert(String(e))
             this.setState({
@@ -83,6 +83,8 @@ export default class StorageDemo extends React.Component {
             : '-';
         const maxMint = this.state.contractState.maxMint || '-';
         const isSoldOut = numRemaining <= 0;
+        const price = this.state.contractState.price ? web3.utils.fromWei(String(this.state.contractState.price), 'ether') : '-';
+
         return (
             <div className="mint-page">
                 <div className="outer-container">
@@ -129,12 +131,18 @@ export default class StorageDemo extends React.Component {
                                         </div>
                                     </div>
                                   
-                                    <div>
-                                        <p>
-                                            In addition to a limited ERC-1155 token, you'll recieve 1 $WAV governance token, giving you voting rights for the use of the pooled funds.<br/> <a href="/faq">Learn more</a>
-                                        </p>
-                                        <div className="mint-button" onClick={ !isSoldOut ? this.onMintButtonClick : ()=>{} }>
-                                            { isSoldOut ? <SoldOutSvg /> : <MintButtonSVG /> }
+                                    <p>
+                                        In addition to a limited ERC-1155 token, you'll recieve 1 $WAV governance token, giving you voting rights for the use of the pooled funds.<br/> <a href="/faq">Learn more</a>
+                                    </p>
+
+                                    <div className="mint-button-container">
+                                        <div className="mint-button-bg" onClick={ !isSoldOut ? this.onMintButtonClick : ()=>{} }>
+                                            { isSoldOut ? "Sold Out" : "Mint" }
+                                        </div>
+                                        <div>
+                                            <strong>Price:</strong>
+                                            &nbsp;
+                                            <span>{ price } ETH </span>
                                         </div>
                                     </div>
                                 </div>
