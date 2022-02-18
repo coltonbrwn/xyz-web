@@ -17,7 +17,7 @@ contract XYZManifoldExtension is ICreatorExtensionTokenURI, AdminControl  {
     uint256 private NUM_MINTED = 0;
     uint256 private constant PRICE = 0.01 ether;
     uint256 private constant MAX_MINTABLE = 5;
-    uint8 private constant TOKEN_ID = 4;
+    uint8 private constant TOKEN_ID = 5;
     bool private isEnabled = true;
 
     event Minted(address owner);

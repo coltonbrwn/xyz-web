@@ -1,5 +1,6 @@
 import React  from 'react'
 import Link from 'next/link'
+import Img from 'next/image'
 import detectEthereumProvider from '@metamask/detect-provider';
 import { createAlchemyWeb3  } from '@alch/alchemy-web3';
 import web3 from 'web3';
@@ -19,13 +20,14 @@ export default class StorageDemo extends React.Component {
           isWalletConnected: false,
           walletAddress: '',
           contractState: {},
-          transactionPending: false
+          transactionPending: false,
+          isModalOpen: false,
+          txHash: null
       }
       this.web3Provider = null;
     }
 
     async componentDidMount() {
-
         try {
             this._fetchContractViewData();
             this.web3Provider = await detectEthereumProvider();
@@ -52,10 +54,12 @@ export default class StorageDemo extends React.Component {
             this.setState({
                 transactionPending: true
             })
-            const txHash = await mintExisting(this.web3Provider, Number(this.state.contractState.price))
+            const { transactionHash: txHash } = await mintExisting(this.web3Provider, Number(this.state.contractState.price))
             this._fetchContractViewData()
+            this._showSuccessModal()
             this.setState({
-                transactionPending: false
+                transactionPending: false,
+                txHash
             })
         } catch (e) {
             alert(String(e.message))
@@ -80,6 +84,18 @@ export default class StorageDemo extends React.Component {
             contractState
         })
     }
+
+    _showSuccessModal = () => {
+        this.setState({
+            isModalOpen: true
+        })
+    }
+
+    _hideSuccessModal = () => {
+        this.setState({
+            isModalOpen: false
+        })
+    }
     
     _numRemaining() {
         let numRemaining;
@@ -102,6 +118,11 @@ export default class StorageDemo extends React.Component {
         const network = process.env.NEXT_PUBLIC_NETWORK_NAME
         const contractAddress = process.env.NEXT_PUBLIC_MANIFOLD_CONTRACT_ADDRESS
         return `https://${ network === 'rinkeby' ? 'rinkeby.' : ''}etherscan.io/token/${ contractAddress }`
+    }
+
+    _generateTransactionUrl() {
+        const network = process.env.NEXT_PUBLIC_NETWORK_NAME
+        return `https://${ network === 'rinkeby' ? 'rinkeby.' : ''}etherscan.io/tx/${ this.state.txHash }`
     }
 
     _metamaskInit = async () => {
@@ -141,6 +162,38 @@ export default class StorageDemo extends React.Component {
 
         return (
             <div className="mint-page">
+
+                { this.state.isModalOpen ? (
+                    <div id="modal">
+                        <div className="modal-inner">
+                            <h1>🎉Hooray!</h1>
+                            <div className="modal-split-layout">
+                                <img src="/media/c1.png" />
+                                <div>
+                                    <h4>
+                                        Welcome to XYZ! Your token has been successfully minted.
+                                    </h4>
+                                    <h4>
+                                        Thank you for supporting independent art and music on the blockchain.
+                                    </h4>
+                                    <h4>
+                                        Next, head on over to <a href="https://discord.gg/XmCFR2vJ" target="_blank" rel="noreferrer">the discord</a>, get verified and learn how to contribute.
+                                    </h4>
+                                </div>
+                            </div>
+                            <p>
+                                etherescan transaction: &nbsp;
+                                <a href={ this._generateTransactionUrl() } target="_blank" rel="noreferrer">
+                                    { this.state.txHash }
+                                </a>
+                            </p>
+                            <div className='button-container' onClick={ this._hideSuccessModal }>
+                                Close
+                            </div>
+                        </div>
+                    </div>
+                ) : '' }
+
                 <div className="outer-container">
                     <div className='header'>
                         <div className="logo">
@@ -186,12 +239,12 @@ export default class StorageDemo extends React.Component {
                                     </div>
                                   
                                     <p>
-                                        In addition to a limited ERC-1155 token, you'll recieve 1 $WAV governance token, giving you voting rights for the use of the pooled funds.<br/> <a href="/faq">Learn more</a>
+                                        In addition to a limited ERC-1155 token, you'll recieve 1 $WAV governance token, giving you voting rights for the use of the pooled funds. You'll also get a link to a free lossless version of the music.<br/> <Link href="/"><strong>Learn more</strong></Link>
                                     </p>
 
                                     <div className="mint-button-container">
                                         <div
-                                            className={`mint-button-bg ${ isButtonActive ? '' : '--inactive' }`}
+                                            className={`mint-button-bg button-container ${ isButtonActive ? '' : '--inactive' }`}
                                             onClick={ this.onMintButtonClick }
                                         >
                                             { buttonText }

@@ -70,8 +70,8 @@ h3 {
 }
 h4 {
   font-family: 'Helvetica';
-  color: rgb(99, 99, 99);
-  margin-bottom: 0;
+  font-size: 4rem;
+  margin-bottom: 1em;
 }
 h5 { 
   font-family: 'Helvetica';
@@ -267,7 +267,66 @@ img.y-axis-bg {
   height: 1.8em;
   margin-right: 1rem;
 }
+.mint-page #modal {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.337);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.mint-page #modal .modal-inner {
+  padding: 2em 3em;
+  max-width: 35em;
+  margin: 0 auto;
+  background: white;
+  text-align: center;
+}
+.mint-page #modal .modal-inner h1 {
+  font-family: Helvetica;
+  font-weight: bold;
+  margin: 0.5em 0;
+}
+.mint-page #modal .modal-inner .modal-split-layout {
+  display: flex;
+  text-align: left;
+  margin: 2em 0;
+}
+.mint-page #modal .modal-inner .modal-split-layout > div {
+  padding: 0.5em 0;
+}
+.mint-page #modal .modal-inner img {
+  width: 10em;
+  height: 10em;
+  margin-right: 2em;
+  box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.18);
+  border-radius: 5px;
+}
+.mint-page #modal .modal-inner a {
+  font-weight: bold;
+}
+.mint-page #modal .button-container {
+  max-width: 8em;
+  margin: 1em auto;
+}
 
+.button-container {
+  background: linear-gradient(180deg, #A6D5F8 0%, #F8F8F8 100%);
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 17px;
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 0.6em 1.7em;
+}
+.button-container:not(.--inactive):hover {
+  transform: scale(1.02, 1.02);
+  cursor: pointer;
+}
 
 .mint-main {
   padding: 2em 0;
@@ -284,18 +343,7 @@ img.y-axis-bg {
   width: 1.5em;
 }
 .mint-main .mint-button-bg {
-  background: linear-gradient(180deg, #A6D5F8 0%, #F8F8F8 100%);
-  border: 2px solid #FFFFFF;
-  box-sizing: border-box;
-  border-radius: 17px;
-  font-size: 3rem;
-  font-weight: bold;
-  padding: 0.6em 1.7em;
   margin-right: 2em;
-}
-.mint-main .mint-button-bg:not(.--inactive):hover {
-  transform: scale(1.02, 1.02);
-  cursor: pointer;
 }
 
 .mint-main .mint-button-container {
