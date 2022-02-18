@@ -279,6 +279,53 @@ export default class StorageDemo extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <div className='media-description'>
+                        <div className="content-container">
+                            <div className="flex">
+                                <div>
+                                    <h5>Description</h5>
+                                    <p>&nbsp;</p>
+                                    <p>
+                                    Music by Colton Brown
+                                    </p>
+                                    <p>
+                                    Written and recorded in Panama City / Mexico City
+                                    </p>
+                                    <p>
+                                        Mixed in Brooklyn, NY
+                                    </p>
+                                    <p>&nbsp;</p>
+                                    <p>
+                                        Artwork by Ricky Alba
+                                    </p>
+                                    <p>
+                                        Mastered by Connor Dalton
+                                    </p>
+                                    <p>&nbsp;</p>
+
+                                </div>
+                                <div>
+                                    <h5>
+                                        Token details
+                                    </h5>
+                                    <p>&nbsp;</p>
+                                    <p>
+                                        Token adheres to the ERC-1155 token standard and utilizes manifold.xyz smart-contracts via their extension pattern.
+                                        All future releases from XYZ will be part of this same ERC-1155 collection, with the present release being token ID #1.
+                                    </p>
+                                    <p>&nbsp;</p>
+                                    <p>
+                                        The audio is stored on arweave and therefore is limited to 10MB per upload, or about 4 minutes of playtime. To accomodate this restriction the three songs have been shortened and combined into a single file.
+                                        The full lossless version will be provided on request for any token holder. The music can also be found on Spotify and Bandcamp.
+                                    </p>
+                                    <p>&nbsp;</p>
+                                    <p>
+                                        Owners of this token also have claim to 1 $WAV token, the governance token of the DAO. As long as the purchaser maintains posession of the token, they are rights-bearing DAO members and can participate in treasury decisions or ideation sessions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className="text-content">
                         <div className="content-container">
                             <div className="main">

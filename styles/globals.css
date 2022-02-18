@@ -314,6 +314,18 @@ img.y-axis-bg {
   margin: 1em auto;
 }
 
+.flex {
+  display: flex;
+}
+.flex > div {
+  flex: 1
+}
+@media (max-width: 750px) {
+  .flex {
+    flex-direction: column;
+  }
+}
+
 .button-container {
   background: linear-gradient(180deg, #A6D5F8 0%, #F8F8F8 100%);
   border: 2px solid #FFFFFF;
@@ -326,6 +338,11 @@ img.y-axis-bg {
 .button-container:not(.--inactive):hover {
   transform: scale(1.02, 1.02);
   cursor: pointer;
+}
+
+.media-description {
+  padding: 2em 0;
+  border-top: var(--line-width) solid black;
 }
 
 .mint-main {
