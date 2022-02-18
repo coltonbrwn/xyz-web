@@ -221,7 +221,7 @@ export default class StorageDemo extends React.Component {
                                 <div className="col-3">
                                     <img className='album-img' src="/media/c1.png" />
                                     <audio controls>
-                                        <source src="/media/self-reflection.mp3" type="audio/mp3"></source>
+                                        <source src="/media/self-reflection-short.mp3" type="audio/mp3"></source>
                                     </audio>
                                 </div>
                                 <div className="col-3 mint-info-wrapper">
@@ -239,7 +239,7 @@ export default class StorageDemo extends React.Component {
                                     </div>
                                   
                                     <p>
-                                        In addition to a limited ERC-1155 token, you'll recieve 1 $WAV governance token, giving you voting rights for the use of the pooled funds. You'll also get a link to a free lossless version of the music.<br/> <Link href="/"><strong>Learn more</strong></Link>
+                                        In addition to a limited ERC-1155 token, you'll recieve 1 $WAV governance token, giving you voting rights for the use of the pooled funds. You'll also access to a free lossless version of the music via the DAO.<br/> <Link href="/"><strong><a>Learn More</a></strong></Link>
                                     </p>
 
                                     <div className="mint-button-container">
